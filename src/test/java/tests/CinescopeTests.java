@@ -63,7 +63,4 @@ public class CinescopeTests extends BaseTest{
         sleep(5000);
 
     }
-
-
-
 }
