@@ -3,6 +3,10 @@ package tests;
 import DataOfTests.FilmsAndPrice;
 import DataOfTests.NewUsers;
 import com.codeborne.selenide.Selenide;
+import fakeUser.Address;
+import fakeUser.Geolocation;
+import fakeUser.Name;
+import fakeUser.UserRoot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +18,7 @@ import org.openqa.selenium.By;
 import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.restassured.RestAssured.given;
 
 
 public class CinescopeTests extends BaseTest{
@@ -61,6 +66,6 @@ public class CinescopeTests extends BaseTest{
                 .assertRoleOfNewUser(newUsers.getRole())
                 .assertFullNameOfNewUser(newUsers.getFullName());
         sleep(5000);
-
     }
+
 }
