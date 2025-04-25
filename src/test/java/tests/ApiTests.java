@@ -1,8 +1,11 @@
 package tests;
 
+import API.Auth;
 import API.FilmRoot;
 import API.Genre;
 import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
@@ -19,17 +22,18 @@ import java.util.Map;
 
 public class ApiTests {
     @BeforeAll
-    public static void setUp(){
-        RestAssured.baseURI = "https://auth.dev-cinescope.krisqa.ru/";
+    public static void setUp() {
+      //  RestAssured.baseURI = "https://api.dev-cinescope.krisqa.ru/";
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+
     }
+
 
     @Test
     public void createNewFilm(){
+        Auth auth = new Auth("KcLMmxkJMjBD1","test-admin@mail.com");
 
-        Map<String,String> auth = new HashMap<>();
-        auth.put("email", "test-admin@mail.com");
-        auth.put("password", "KcLMmxkJMjBD1");
-        String token = "Bearer " + given().contentType(ContentType.JSON).body(auth).post("login")
+        String token = given().contentType(ContentType.JSON).body(auth).post("https://auth.dev-cinescope.krisqa.ru/login")
                 .then().statusCode(201).extract().jsonPath().getString("accessToken");
         System.out.println(token);
 
@@ -39,14 +43,14 @@ public class ApiTests {
                 .imageUrl("https://image.url")
                 .location("SPB")
                 .genreId(2)
-                .description("Описание фильм2а")
+                .description("Описание фильма")
                 .published(true)
-                .name("Название фильма21")
+                .name("Назва11фильма")
                 .build();
 
+        given().get("https://api.dev-cinescope.krisqa.ru/genres");
 
-        given().log().all().contentType(ContentType.JSON).header("Authorization", token).body(bodyRequest)
-                .post("https://api.dev-cinescope.krisqa.ru/movies")
-                .then().log().all();
+        given().auth().oauth2(token).contentType(ContentType.JSON).body(bodyRequest)
+                .post("https://api.dev-cinescope.krisqa.ru/movies").then().statusCode(201);
     }
 }

@@ -10,13 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class FilmRoot{
 
 	@JsonProperty("genreId")
 	private int genreId;
-
-	@JsonProperty("createdAt")
-	private String createdAt;
 
 	@JsonProperty("price")
 	private int price;
@@ -27,9 +25,6 @@ public class FilmRoot{
 	@JsonProperty("name")
 	private String name;
 
-	@JsonProperty("genre")
-	private Genre genre;
-
 	@JsonProperty("rating")
 	private int rating;
 
@@ -38,9 +33,6 @@ public class FilmRoot{
 
 	@JsonProperty("location")
 	private String location;
-
-	@JsonProperty("id")
-	private int id;
 
 	@JsonProperty("published")
 	private boolean published;
