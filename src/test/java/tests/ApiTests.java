@@ -24,6 +24,7 @@ public class ApiTests {
     @BeforeAll
     public static void setUp() {
       //  RestAssured.baseURI = "https://api.dev-cinescope.krisqa.ru/";
+
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
 
     }
