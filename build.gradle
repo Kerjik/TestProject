@@ -26,8 +26,12 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
     testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    implementation 'org.aeonbits.owner:owner:1.0.12'
+
 }
 
 test {
     useJUnitPlatform()
+    systemProperties System.getProperties()
 }

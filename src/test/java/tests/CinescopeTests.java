@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -66,6 +67,20 @@ public class CinescopeTests extends BaseTest{
                 .assertRoleOfNewUser(newUsers.getRole())
                 .assertFullNameOfNewUser(newUsers.getFullName());
         sleep(5000);
+    }
+    @Test
+    public void filmsPriceTestApi(){
+        CinescopePage cinescopePage = new CinescopePage();
+        ApiTests apiTests = new ApiTests();
+        String descriptionToFilm = "апельсин";
+        Map<String, Object> createdFilmFromApi = apiTests.responseOfCreatedFilmApi(descriptionToFilm);
+        authorization();
+        String apiDescription = createdFilmFromApi.get("description").toString();
+        String uiDescription = cinescopePage.chooseFilm(createdFilmFromApi.get("name").toString()).getDescription();
+
+        Assertions.assertEquals(apiDescription, uiDescription);
+
+
     }
 
 }

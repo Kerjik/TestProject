@@ -54,10 +54,16 @@ public class CinescopePage {
     //Кнопка "Создать" в окне создания нового пользователя
     private final SelenideElement createBtn = $x("//button[text() = 'Создать']");
 
+    //Описание у фильма
+    private final SelenideElement description = $x("//h2/following::p[@class = 'mt-10 text-lg']");
+
     public CinescopePage chooseFilm(String filmsName){
         String setFilm = String.format(chooseFilmBtn, filmsName);
         $x(setFilm).click();
         return this;
+    }
+    public String getDescription(){
+       return description.getText();
     }
     public int getIntPriceOfFilm(){
         return Integer.parseInt(priceOfFilm.getText().replaceAll("[^0-9]", ""));
