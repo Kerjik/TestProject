@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class BaseTest {
 
     public void authorization(){
-        open("https://cinescope.t-qa.ru/");
+        open("https://dev-cinescope.t-qa.ru");
         $x("//button[contains (text(), 'Войти')]").click();
         $(By.id("email")).sendKeys("test-admin@mail.com");
         $(By.id("password")).setValue("KcLMmxkJMjBD1").pressEnter();
